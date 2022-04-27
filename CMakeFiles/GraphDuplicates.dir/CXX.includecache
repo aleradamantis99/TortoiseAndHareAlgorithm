@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/alejandro/Desktop/GraphTest/src/main.cpp
+SFML/Graphics.hpp
+-
+concepts
+-
+iostream
+-
+cmath
+-
+random
+-
+algorithm
+-
+
