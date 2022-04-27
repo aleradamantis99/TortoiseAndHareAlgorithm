@@ -15,9 +15,10 @@ public:
         diff_angle(2*M_PI/nc),
         circle_shape(circle_radius)
     {
-        circle_shape.setFillColor(sf::Color::Green);
+        circle_shape.setFillColor(sf::Color(20, 120, 20));
         circle_shape.setOrigin(circle_radius, circle_radius);
-
+        circle_shape.setOutlineThickness(2);
+        circle_shape.setOutlineColor(sf::Color(20, 70, 20));
         font.loadFromFile("arial.ttf");
 
         t.setString("0");
@@ -79,7 +80,7 @@ public:
                         break;
                 }
             }
-            window.clear();
+            window.clear(sf::Color(140, 136, 140));
             
             window.draw(hare);
             window.draw(tortoise);
