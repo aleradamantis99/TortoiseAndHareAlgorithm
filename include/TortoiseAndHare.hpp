@@ -8,7 +8,6 @@ public:
     TortoiseAndHare(sf::RenderWindow& w, float dr, size_t nc):
         window(w),
         n_circles(nc),
-        gen(1, nc-1),
         number_vector(nc),
         disk_radius(dr),
         circle_radius(2*M_PI*dr/(4*nc)),
@@ -242,7 +241,6 @@ private:
 
     sf::RenderWindow& window;
     size_t n_circles;
-    RandomGen<int> gen;
     std::vector<int> number_vector;
     float disk_radius;
     float circle_radius;
