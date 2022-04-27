@@ -27,8 +27,6 @@ public:
         t.setOrigin(rect.width/2, rect.height/2);
 
         set_sprites();
-
-        
     }
 
     TortoiseAndHare(sf::RenderWindow& w, float dr, std::vector<int> v):
@@ -62,27 +60,10 @@ public:
     {
         while (window.isOpen())
         {
-            sf::Event event;
-            while (window.pollEvent(event))
-            {
-                switch(event.type)
-                {
-                    case sf::Event::Closed:
-                        window.close();
-                        break;
+            event_loop();
 
-                    case sf::Event::KeyPressed:
-                        if (event.key.code == sf::Keyboard::Space)
-                        {
-                            moving = true;
-                        }
-                        break;
-                }
-            }
             window.clear(sf::Color(140, 136, 140));
             
-            window.draw(hare);
-            window.draw(tortoise);
             draw_arrows();            
             draw_circles();
             
@@ -92,6 +73,7 @@ public:
             }
             window.draw(hare);
             window.draw(tortoise);
+
             window.display();
         }
     }
@@ -111,8 +93,7 @@ private:
         static sf::Vector2f tortoise_movement = sf::Vector2f(0, 0);
         static bool hare_first_circle = true;
         const static float hare_speed = 0.8f, tortoise_speed = 0.4f;
-        //moving = false;
-        //size_t hare_i_next = number_vector[number_vector[hare_i]];
+        
         size_t hare_i_next = number_vector[hare_i];
         size_t tortoise_i_next = number_vector[tortoise_i];
         if (hare_movement == sf::Vector2f(0, 0) and tortoise_movement == sf::Vector2f(0, 0))
@@ -189,9 +170,10 @@ private:
 
             int next = number_vector[start];
             sf::Vector2f pos2 = get_circle_pos(next);
-            auto v = pos2-pos1;
+            
             if(start != next)
             {
+                auto v = pos2-pos1;
                 change_size_to(v, circle_radius+2);
                 pos2 -= v;
                 draw_arrow(window, pos1, pos2, hsv((360.f/n_circles)*i, 0.7f, 0.7f));
@@ -238,6 +220,26 @@ private:
         }
     }
     
+    void event_loop()
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            switch(event.type)
+            {
+                case sf::Event::Closed:
+                    window.close();
+                    break;
+
+                case sf::Event::KeyPressed:
+                    if (event.key.code == sf::Keyboard::Space)
+                    {
+                        moving = true;
+                    }
+                    break;
+            }
+        }
+    }
 
     sf::RenderWindow& window;
     size_t n_circles;
